@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp/www/Tchat/app/config/routing.yml</file>
-            <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/public/images/U.png</file>
+            <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Entity/Message.php</file>
+            <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Form/MessageType.php</file>
             <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/views/Default/ajaxvu.html.twig</file>
             <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Controller/DefaultController.php</file>
-            <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/public/images/M.png</file>
             <file>file:/C:/wamp/www/Tchat/src/MyApp/TchatBundle/Resources/views/Default/ajaxresponse.html.twig</file>
         </group>
     </open-files>

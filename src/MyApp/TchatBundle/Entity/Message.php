@@ -31,7 +31,7 @@ class Message
      *
      * @ORM\Column(name="texte", type="string", length=255,nullable=true)
      */
-    private $text;
+    private $texte;
 
     /**
      * @var \DateTime
@@ -39,11 +39,16 @@ class Message
      * @ORM\Column(name="date_creation",type="datetime",nullable=true)
      */
     private $datecreation;
-
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_lu",type="datetime",nullable=true)
+     */
+    private $datelu;
     /**
      * @var boolean
      *
-     * @ORM\Column(name="lu")
+     * @ORM\Column(name="lu",nullable=true)
      */
     private $lu;
 
@@ -63,28 +68,16 @@ class Message
         return $this->id;
     }
 
-    /**
-     * Get text
-     *
-     * @return string
-     */
-    public function getText()
+    function getTexte()
     {
-        return $this->text;
+        return $this->texte;
     }
 
-    /**
-     * Set text
-     *
-     * @param string $text
-     * @return Message
-     */
-    public function setText($text)
+    function setTexte($texte)
     {
-        $this->text = $text;
-
-        return $this;
+        $this->texte = $texte;
     }
+
 
     /**
      * Get datecreation
@@ -106,6 +99,16 @@ class Message
     {
         $this->datecreation = $datecreation;
         return $this;
+    }
+
+    function getDatelu()
+    {
+        return $this->datelu;
+    }
+
+    function setDatelu(\DateTime $datelu)
+    {
+        $this->datelu = $datelu;
     }
 
     /**

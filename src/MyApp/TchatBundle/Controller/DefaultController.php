@@ -61,7 +61,26 @@ class DefaultController extends Controller
 
     public function makevuAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->container->get('security.context')->getToken()->getUser();
 
-    }
+        $messages = $em->getRepository('MyAppTchatBundle:message')->findBy(array(), array('datecreation' => 'DESC'));
+
+        if ($request->isXmlHttpRequest()) {
+            if (!empty($messages)) {
+                $message = $messages[0];  // $message est un objet
+                if ($message->getUser() != $user) {
+                    $message->setLu(TRUE);
+                    $message->setDatelu(new \DateTime());
+                    $em->persist($message);
+                    $em->flush();
+                }
+            }
+            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajaxvu.html.twig', array(
+                'messages' => $messages
+            ));
+
+        }
+    } 
 
 }

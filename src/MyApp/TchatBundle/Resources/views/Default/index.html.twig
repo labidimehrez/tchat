@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/myapptchat/css/style.css') }}"/>
     <link rel="stylesheet" type="text/css" media="screen"
           href="{{ asset('bundles/myapptchat/css/bootstrapmin.css') }}"/>
+
     <script src="{{ asset('bundles/myapptchat/js/jqueryajax.min.js') }}" type="text/javascript"></script>
 
 
@@ -28,102 +29,74 @@
                     </div>
                 </div>
                 <div class="panel-collapse collapse in" id="collapseOne">
+
+
                     <div class="panel-body">
                         <ul class="chat">
-                            <li class="left clearfix">
-                                        <span class="chat-img pull-left">                                                                                      
-                                            <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar"
-                                                 class="img-circle">
-                                        </span>
 
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font">Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <span class="glyphicon glyphicon-time"></span>12 mins ago
-                                        </small>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                        ornare
-                                        dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="right clearfix">
-                                        <span class="chat-img pull-right">
-                                            <img src="{{ asset('bundles/myapptchat/images/M.png') }}" alt="User Avatar"
-                                                 class="img-circle">
-                                        </span>
+                            {% for messages in messages %}
+                                {% if messages.user.id == app.user.id %}
 
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins
-                                            ago
-                                        </small>
-                                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                        ornare
-                                        dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
+                                    <li class="left clearfix"> {# current user#}
                                         <span class="chat-img pull-left">
-                                            <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar"
-                                                 class="img-circle">
-                                        </span>
+                                                    <img src="{{ asset('bundles/myapptchat/images/M.png') }}"
+                                                         alt="User Avatar" class="img-circle">
+                                                </span>
 
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font">Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <span class="glyphicon glyphicon-time"></span>14 mins ago
-                                        </small>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                        ornare
-                                        dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="right clearfix">
+                                        <div class="chat-body clearfix" id="{{ messages.id }}">
+                                            <div class="header">
+                                                <strong class="primary-font">{{ messages.user.username }}</strong>
+                                                <small class="pull-right text-muted">
+                                                    <span class="glyphicon glyphicon-time"></span>{{ time_diff(messages.datecreation) }}
+                                                </small>
+                                            </div>
+                                            <p>
+                                                {{ messages.texte }}
+                                            </p>
+                                        </div>
+                                    </li>
+
+                                {% else %}
+
+
+                                    <li class="right clearfix">    {# other user#}
                                         <span class="chat-img pull-right">
-                                            <img src="{{ asset('bundles/myapptchat/images/M.png') }}" alt="User Avatar"
-                                                 class="img-circle">
-                                        </span>
+                                                    <img src="{{ asset('bundles/myapptchat/images/U.png') }}"
+                                                         alt="User Avatar" class="img-circle">
+                                                </span>
 
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins
-                                            ago
-                                        </small>
-                                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                        ornare
-                                        dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
+                                        <div class="chat-body clearfix" id="{{ messages.id }}">
+                                            <div class="header">
+                                                <small class=" text-muted"><span
+                                                            class="glyphicon glyphicon-time"></span>
+                                                    {{ time_diff(messages.datecreation) }}
+                                                </small>
+                                                <strong class="pull-right primary-font">{{ messages.user.username }}</strong>
+                                            </div>
+                                            <p>
+                                                {{ messages.texte }}
+                                            </p>
+                                        </div>
+                                    </li>
+                                {% endif %}
+
+
+
+                            {% endfor %}
+
+
                         </ul>
                     </div>
+
+
                     <div class="panel-footer">
 
-                        {{ form_start(form, {'method': 'POST','attr': { 'id':'form_add_category'}}) }}
+                        {{ form_start(form, { 'attr': { 'id':'form_submit'} } ) }}
                         <div class="input-group">
                             <!-- <input id="btn-input" type="text" class="form-control input-sm"   placeholder="Type your message here...">-->
-                            <div id="hide"> {{ form_widget(form.text, { 'attr': { 'class':'form-control input-sm','id':'btn-input','placeholder':'Type your message here...'} } ) }} </div>
-                            <script type="text/javascript">
+                            <div id="inputid"> {{ form_widget(form.texte, { 'attr': { 'class':'form-control input-sm','id':'btn-input','placeholder':'Type your message here...'} } ) }}   </div>
 
-                                $("#hide").click(function () {
-                                    //  $("#btn-chat").hide();  // ajax call ici
-                                });
-                            </script>
+
                                     <span class="input-group-btn">
                                         <button class="btn btn-warning btn-sm" id="btn-chat" type="submit">
                                             Send
@@ -133,7 +106,7 @@
                         {{ form_end(form) }}
                         <script type="text/javascript">
                             $(function () {
-                                $("#btn-chat").click(function (e) { // On sélectionne le formulaire par son identifiant
+                                $("#form_submit").submit(function (e) {
                                     e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire
                                     $.ajax({
                                         type: 'post',
@@ -143,12 +116,30 @@
                                         cache: false,
                                         success: function (data) {
                                             $('div.panel-body').html(data);
+                                            $('#form_submit')[0].reset();
                                         }
                                     });
                                     return false;
                                 });
-                            });
+                                    });
                         </script>
+
+                        <script type="text/javascript">
+                            /*   $("div#inputid").click(function () {
+                             $.ajax({
+                             type: 'post',
+                             url: "{{path('my_app_tchat_makevu') }}",
+                             data: $(this).serialize(),
+                             datatype: "json",
+                             cache: false,
+                             success: function (data) {
+                             // $('div.panel-body').html(data);
+                             }
+                             });
+                             });*/
+                        </script>
+
+
                     </div>
                         </div>
                     </div>

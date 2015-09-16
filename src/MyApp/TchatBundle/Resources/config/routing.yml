@@ -1,8 +1,19 @@
+
+
 my_app_tchat_homepage:
     path:     /index.php 
     defaults: { _controller: MyAppTchatBundle:Default:index }
-
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true  
+        
+        
 
 my_app_tchat_makevu:
-    path:     /yu 
+    path:     /vu 
     defaults: { _controller: MyAppTchatBundle:Default:makevu }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true  

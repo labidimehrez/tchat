@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new MyApp\TchatBundle\MyAppTchatBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
