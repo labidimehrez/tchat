@@ -17,7 +17,7 @@
 <body>
 <div class=" ">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5" style="    left: 420px;    top: 150px;    width: 400px;    position: absolute;">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="accordion">
                     <span class="glyphicon glyphicon-comment"></span> Chat
@@ -115,31 +115,46 @@
                                         datatype: "json",
                                         cache: false,
                                         success: function (data) {
-                                            $('div.panel-body').html(data);
                                             $('#form_submit')[0].reset();
                                         }
                                     });
                                     return false;
                                 });
-                                    });
+                            });
                         </script>
 
                         <script type="text/javascript">
-                            /*   $("div#inputid").click(function () {
-                             $.ajax({
-                             type: 'post',
-                             url: "{{path('my_app_tchat_makevu') }}",
-                             data: $(this).serialize(),
-                             datatype: "json",
-                             cache: false,
-                             success: function (data) {
-                             // $('div.panel-body').html(data);
-                             }
-                             });
-                             });*/
+                            $("div#inputid").click(function () {
+                                $.ajax({
+                                    type: 'post',
+                                    url: "{{path('my_app_tchat_makevu') }}",
+                                    data: $(this).serialize(),
+                                    datatype: "json",
+                                    cache: false,
+                                    success: function (data) {
+                                        // $('div.panel-body').html(data);
+                                    }
+                                });
+                            });
                         </script>
 
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                var refreshId = setInterval(function () {
+                                    $.ajax({
+                                        type: 'post',
+                                        url: "{{path('my_app_tchat_show') }}",
+                                        data: $(this).serialize(),
+                                        datatype: "json",
+                                        cache: false,
+                                        success: function (data) {
+                                            $('div.panel-body').html(data);
+                                        }
+                                    });
 
+                                }, 1000);      /// 10 s entre deux ajax call
+                            });
+                        </script>
                     </div>
                         </div>
                     </div>

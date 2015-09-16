@@ -9,7 +9,14 @@ my_app_tchat_homepage:
         expose: true  
         
         
-
+my_app_tchat_show:
+    path:     /show 
+    defaults: { _controller: MyAppTchatBundle:Default:show }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true  
+        
 my_app_tchat_makevu:
     path:     /vu 
     defaults: { _controller: MyAppTchatBundle:Default:makevu }
