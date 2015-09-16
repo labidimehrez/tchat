@@ -47,6 +47,12 @@ class Message
      */
     private $lu;
 
+    public function __construct()
+    {
+
+        $this->datecreation = new \DateTime();
+    }
+
     /**
      * Get id
      *
@@ -96,10 +102,9 @@ class Message
      * @param \DateTime $datecreation
      * @return Message
      */
-    public function setDatecreation($datecreation)
+    public function setDatecreation(\DateTime $datecreation)
     {
         $this->datecreation = $datecreation;
-
         return $this;
     }
 

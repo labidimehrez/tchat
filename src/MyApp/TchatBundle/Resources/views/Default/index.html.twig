@@ -30,9 +30,8 @@
                 <div class="panel-collapse collapse in" id="collapseOne">
                     <div class="panel-body">
                         <ul class="chat">
-                            <li class="left clearfix"><span class="chat-img pull-left">
-                                            
-                                            
+                            <li class="left clearfix">
+                                        <span class="chat-img pull-left">                                                                                      
                                             <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar"
                                                  class="img-circle">
                                         </span>
@@ -51,7 +50,8 @@
                                     </p>
                                 </div>
                             </li>
-                            <li class="right clearfix"><span class="chat-img pull-right">
+                            <li class="right clearfix">
+                                        <span class="chat-img pull-right">
                                             <img src="{{ asset('bundles/myapptchat/images/M.png') }}" alt="User Avatar"
                                                  class="img-circle">
                                         </span>
@@ -70,9 +70,10 @@
                                     </p>
                                 </div>
                             </li>
-                            <li class="left clearfix"><span class="chat-img pull-left">
-                                         <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar"
-                                              class="img-circle">
+                            <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar"
+                                                 class="img-circle">
                                         </span>
 
                                 <div class="chat-body clearfix">
@@ -89,7 +90,8 @@
                                     </p>
                                 </div>
                             </li>
-                            <li class="right clearfix"><span class="chat-img pull-right">
+                            <li class="right clearfix">
+                                        <span class="chat-img pull-right">
                                             <img src="{{ asset('bundles/myapptchat/images/M.png') }}" alt="User Avatar"
                                                  class="img-circle">
                                         </span>
@@ -111,22 +113,55 @@
                         </ul>
                     </div>
                     <div class="panel-footer">
+
+                        {{ form_start(form, {'method': 'POST','attr': { 'id':'form_add_category'}}) }}
                         <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm"
-                                   placeholder="Type your message here...">
+                            <!-- <input id="btn-input" type="text" class="form-control input-sm"   placeholder="Type your message here...">-->
+                            <div id="hide"> {{ form_widget(form.text, { 'attr': { 'class':'form-control input-sm','id':'btn-input','placeholder':'Type your message here...'} } ) }} </div>
+                            <script type="text/javascript">
+
+                                $("#hide").click(function () {
+                                    //  $("#btn-chat").hide();  // ajax call ici
+                                });
+                            </script>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        <button class="btn btn-warning btn-sm" id="btn-chat" type="submit">
                                             Send
                                         </button>
-                                    </span>
+                                    </span> {{ form_widget(form._token) }}
+                        </div>
+                        {{ form_end(form) }}
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#btn-chat").click(function (e) { // On sélectionne le formulaire par son identifiant
+                                    e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire
+                                    $.ajax({
+                                        type: 'post',
+                                        url: "{{path('my_app_tchat_homepage') }}",
+                                        data: $(this).serialize(),
+                                        datatype: "json",
+                                        cache: false,
+                                        success: function (data) {
+                                            $('div.panel-body').html(data);
+                                        }
+                                    });
+                                    return false;
+                                });
+                            });
+                        </script>
+                    </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 </body>
 </html>
+
+
+<!-- pour les ajax call FOSJSrouting Bundle -->
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+<!-- pour les ajax call FOSJSrouting Bundle -->
