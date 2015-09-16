@@ -1,0 +1,3 @@
+my_app_tchat_homepage:
+    path:     /index.php 
+    defaults: { _controller: MyAppTchatBundle:Default:index }
