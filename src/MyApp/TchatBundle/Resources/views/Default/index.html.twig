@@ -29,8 +29,6 @@
                     </div>
                 </div>
                 <div class="panel-collapse collapse in" id="collapseOne">
-
-
                     <div class="panel-body">
                         <ul class="chat">
 
@@ -57,14 +55,11 @@
                                     </li>
 
                                 {% else %}
-
-
                                     <li class="right clearfix">    {# other user#}
                                         <span class="chat-img pull-right">
                                                     <img src="{{ asset('bundles/myapptchat/images/U.png') }}"
                                                          alt="User Avatar" class="img-circle">
                                                 </span>
-
                                         <div class="chat-body clearfix" id="{{ messages.id }}">
                                             <div class="header">
                                                 <small class=" text-muted"><span
@@ -79,24 +74,14 @@
                                         </div>
                                     </li>
                                 {% endif %}
-
-
-
                             {% endfor %}
-
-
                         </ul>
                     </div>
-
-
                     <div class="panel-footer">
-
                         {{ form_start(form, { 'attr': { 'id':'form_submit'} } ) }}
                         <div class="input-group">
                             <!-- <input id="btn-input" type="text" class="form-control input-sm"   placeholder="Type your message here...">-->
                             <div id="inputid"> {{ form_widget(form.texte, { 'attr': { 'class':'form-control input-sm','id':'btn-input','placeholder':'Type your message here...'} } ) }}   </div>
-
-
                                     <span class="input-group-btn">
                                         <button class="btn btn-warning btn-sm" id="btn-chat" type="submit">
                                             Send
@@ -122,7 +107,6 @@
                                 });
                             });
                         </script>
-
                         <script type="text/javascript">
                             $("div#inputid").click(function () {
                                 $.ajax({
@@ -137,7 +121,6 @@
                                 });
                             });
                         </script>
-
                         <script type="text/javascript">
                             $(document).ready(function () {
                                 var refreshId = setInterval(function () {
@@ -152,7 +135,7 @@
                                         }
                                     });
 
-                                }, 1000);      /// 10 s entre deux ajax call
+                                }, 2000);      /// 10 s entre deux ajax call
                             });
                         </script>
                     </div>
@@ -165,7 +148,6 @@
 
 </body>
 </html>
-
 
 <!-- pour les ajax call FOSJSrouting Bundle -->
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

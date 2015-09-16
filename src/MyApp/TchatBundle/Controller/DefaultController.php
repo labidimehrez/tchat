@@ -31,12 +31,12 @@ class DefaultController extends Controller
                 $message->setLu(FALSE);
                 $em->persist($message);
                 $em->flush();
-                exit;
-                //$messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
+                // exit;
+                $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
 
-                /*return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajaxresponse.html.twig', array(
+                return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajax.html.twig', array(
                     'messages' => $messages
-                ));*/
+                ));
             }
         } elseif ($request->isMethod('Post')) {
             $form->bind($request);
@@ -74,19 +74,18 @@ class DefaultController extends Controller
                     $message->setDatelu(new \DateTime());
                     $em->persist($message);
                     $em->flush();
-                    exit;  
+                    // exit;  
                 }
             }
-            //            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajaxvu.html.twig', array(
-            //                'messages' => $messages
-            //            ));
-
+            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajax.html.twig', array(
+                'messages' => $messages
+            ));
         }
     }
 
     public function showAction(Request $request)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         if ($request->isXmlHttpRequest()) {
             $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
             return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajaxresponse.html.twig', array(
