@@ -91,7 +91,7 @@
                         {{ form_end(form) }}
                         <script type="text/javascript">
                             $(function () {
-                                $("#form_submit").submit(function (e) {
+                                $("#form_submit").submit(function (e) {                                
                                     e.preventDefault(); // Le navigateur ne peut pas envoyer le formulaire
                                     $.ajax({
                                         type: 'post',
@@ -103,7 +103,8 @@
                                             $('#form_submit')[0].reset();
                                         }
                                     });
-                                    return false;
+                                    $('#form_submit')[0].reset();
+                                    // return false;
                                 });
                             });
                         </script>
@@ -131,11 +132,11 @@
                                         datatype: "json",
                                         cache: false,
                                         success: function (data) {
-                                            $('div.panel-body').html(data);
+                                            $('div.panel-body').html(data);                                           
                                         }
                                     });
 
-                                }, 2000);      /// 10 s entre deux ajax call
+                                }, 2000);      /// 2 s entre deux ajax call
                             });
                         </script>
                     </div>
