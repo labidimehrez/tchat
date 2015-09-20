@@ -1,0 +1,57 @@
+ 
+ 
+    <ul class="chat">
+
+        {% for messages in messages %} 
+            {% if messages.user.id == app.user.id %}
+
+                <li class="left clearfix"> {# current user#}
+                    <span class="chat-img pull-left">                                                                                      
+                        <img src="{{ asset('bundles/myapptchat/images/M.png') }}" alt="User Avatar"    class="img-circle">
+
+                    </span>
+
+                    <div class="chat-body clearfix" id="{{messages.id}}">
+                        <div class="header">
+                            <strong class="primary-font">{{messages.user.username}}</strong>
+                            <small class="pull-right text-muted">
+                                <span class="glyphicon glyphicon-time"></span>{{ time_diff(messages.datecreation) }}
+                            </small>
+                        </div>
+                        <p>
+                            {{messages.texte}}
+                        </p>
+                        {% if loop.last == TRUE %}					
+                            {% if messages.lu == 1 %}
+                                <h6 style="float:right;">&#10004; Vu: {{messages.datelu|date('H:i:s')}}</h6>{%endif%}
+                        {%endif%}
+                    </div> 
+                </li> 
+
+            {%else %}
+                <li class="right clearfix">    {# other user#}
+                    <span class="chat-img pull-right">
+                        <img src="{{ asset('bundles/myapptchat/images/U.png') }}" alt="User Avatar" class="img-circle">
+
+                    </span>
+
+                        <div class="chat-body clearfix"  id="{{messages.id}}">
+                        <div class="header">
+                            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{ time_diff(messages.datecreation) }}
+
+                            </small>
+                            <strong class="pull-right primary-font">{{messages.user.username}}</strong>
+                        </div>
+                        <p>
+                            {{messages.texte}}
+                        </p> 
+                    </div>
+                </li>
+            {%endif%}
+        {%endfor%}
+
+
+
+    </ul>
+ 
+    

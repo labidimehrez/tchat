@@ -7,11 +7,9 @@ use MyApp\TchatBundle\Form\MessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
-{
+class DefaultController extends Controller {
 
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
 
         $user = $this->container->get('security.context')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -23,7 +21,6 @@ class DefaultController extends Controller
         if ($request->isXmlHttpRequest()) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-
                 $message = $form->getData();
                 if ($user != NULL) {
                     $message->setUser($user);
@@ -34,14 +31,13 @@ class DefaultController extends Controller
                 // exit;
                 $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
 
-                return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajax.html.twig', array(
-                    'messages' => $messages
+                return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:index.html.twig', array(
+                            'messages' => $messages
                 ));
             }
         } elseif ($request->isMethod('Post')) {
             $form->bind($request);
             if ($form->isValid()) {
-
                 $message = $form->getData();
                 if ($user != NULL) {
                     $message->setUser($user);
@@ -49,18 +45,18 @@ class DefaultController extends Controller
                 $message->setLu(FALSE);
                 $em->persist($message);
                 $em->flush();
-
                 $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
                 return $this->redirect($this->generateUrl('my_app_tchat_homepage'));
             }
         } else {
             $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
-            return $this->render('MyAppTchatBundle:Default:index.html.twig', array('form' => $form->createView(), 'messages' => $messages));
+            return $this->render('MyAppTchatBundle:Default:index.html.twig', array('form' => $form->createView(),
+                        'user' => $user, 'messages' => $messages));
         }
     }
 
-    public function makevuAction(Request $request)
-    {
+    public function makevuAction(Request $request) {
+
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.context')->getToken()->getUser();
 
@@ -74,27 +70,40 @@ class DefaultController extends Controller
                     $message->setDatelu(new \DateTime());
                     $em->persist($message);
                     $em->flush();
-                    // exit;  
+                    //exit;  
                 }
             }
-            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajax.html.twig', array(
-                'messages' => $messages
+            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:index.html.twig', array(
+                        'user' => $user
             ));
         }
     }
 
-    public function showAction(Request $request)
-    {
+    public function showAction(Request $request) {
+        $user = $this->container->get('security.context')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
         if ($request->isXmlHttpRequest()) {
             $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
             return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:ajaxresponse.html.twig', array(
-                'messages' => $messages
+                        'messages' => $messages, 'user' => $user
             ));
         } else {
-            $messages = $em->getRepository('MyAppTchatBundle:message')->getAllMenu();
+            $messages = $em->getRepository('MyAppTchatBundle:message')->findAll();
             return $this->render('MyAppTchatBundle:Default:index.html.twig', array(
-                'messages' => $messages
+                        'messages' => $messages, 'user' => $user
+            ));
+        }
+    }
+
+    public function entraindecrireAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $allusers = $em->getRepository('MyAppTchatBundle:user')->findAll();
+      
+        if ($request->isXmlHttpRequest()) {
+
+            return $this->container->get('templating')->renderResponse('MyAppTchatBundle:Default:entraindecrire.html.twig', array(
+                        'user' => $user
             ));
         }
     }

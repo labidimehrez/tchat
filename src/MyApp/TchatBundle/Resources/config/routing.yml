@@ -17,6 +17,8 @@ my_app_tchat_show:
     options:
         expose: true  
         
+        
+        
 my_app_tchat_makevu:
     path:     /vu 
     defaults: { _controller: MyAppTchatBundle:Default:makevu }
@@ -24,3 +26,13 @@ my_app_tchat_makevu:
         _method:  POST|GET
     options:
         expose: true  
+        
+        
+        
+my_app_tchat_entraindecrire:
+    path:     /entraindecrire 
+    defaults: { _controller: MyAppTchatBundle:Default:entraindecrire }
+    requirements:
+        _method:  POST|GET
+    options:
+        expose: true   
