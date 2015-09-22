@@ -76,6 +76,7 @@ class Message
     function setTexte($texte)
     {
         $this->texte = $texte;
+        return $this;
     }
 
 

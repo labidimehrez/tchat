@@ -19,7 +19,7 @@
                             </small>
                         </div>
                         <p>
-                            {{messages.texte}}
+                            {{messages.texte|raw}}
                         </p>
                         {% if loop.last == TRUE %}					
                             {% if messages.lu == 1 %}
@@ -43,7 +43,7 @@
                             <strong class="pull-right primary-font">{{messages.user.username}}</strong>
                         </div>
                         <p>
-                            {{messages.texte}}
+                            {{messages.texte|raw}}
                         </p> 
                     </div>
                 </li>

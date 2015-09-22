@@ -9,14 +9,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MessageType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('texte', 'text', array('required' => TRUE))
+          ->add('texte','textarea',array('attr'=>  array('class'=>'ckeditor')))
+          ##      ->add('texte')
 //            ->add('datecreation')
 //            ->add('lu')
 //            ->add('user')
@@ -39,9 +36,6 @@ class MessageType extends AbstractType
         ));
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return 'myapp_tchatbundle_message';

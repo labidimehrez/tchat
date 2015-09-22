@@ -35,4 +35,5 @@ my_app_tchat_entraindecrire:
     requirements:
         _method:  POST|GET
     options:
-        expose: true   
+        expose: true
+        
